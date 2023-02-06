@@ -25,6 +25,7 @@
       <input type="text" name="surname" placeholder="Soyad" />
       <textarea name="address" id="" cols="30" rows="10" placeholder="Adress"
       ></textarea>
+      <input type="hidden" id="coords" name="coords" />
 
       <button
         style="background: #4d9348; font-size: 32px; margin: 12px"
@@ -52,6 +53,22 @@
 
       // https://docs.google.com/spreadsheets/d/1yqTvnhsOXRJ723Dn0vg3p9wkgBP3RrWAVvCAujxXTFI/edit#gid=1839708717
       // send this data to google sheets
+    </script>
+    <script>
+      function showPosition(position)
+      {
+        var lat=position.coords.latitude;
+        var lon=position.coords.longitude;
+        document.getElementById("coords").value = lat + ";" + lon;
+      }
+      document.onreadystatechange = function () {
+            if (document.readyState == "interactive") {
+              if (navigator.geolocation)
+              {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              }
+            }
+        }
     </script>
   </body>
 </html>
